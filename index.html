@@ -7,6 +7,7 @@
     <script src="https://unpkg.com/react@17/umd/react.development.js"></script>
     <script src="https://unpkg.com/react-dom@17/umd/react-dom.development.js"></script>
     <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
+    <script src="https://unpkg.com/framer-motion@4.1.17/dist/framer-motion.js"></script>
   <script src="script.js" type="module"></script>
   <script src="https://unpkg.com/babel-standalone@6/babel.min.js"></script>
   <script src="https://cdn.tailwindcss.com"></script>
@@ -21,7 +22,7 @@
  <body class="bg-white">
   <header class="bg-white shadow-md h-24">
     <div class="container mx-auto px-4 py-2 flex items-center h-full">
-        <img alt="Hansu Attorney Partnership logo" class="h-20 mr-8" height="60" src="images\logo_color.jpg" width="180"/>
+        <img alt="Hansu Attorney Partnership logo" class="h-20 mr-8" height="60" src="images\canLogo1.png" width="180"/>
         <nav class="hidden md:flex space-x-6 text-lg font-bold flex-grow justify-center">
       <a class="text-gray-600 hover:text-red-600 relative group px-2 py-1" href="#">
        HAKKIMIZDA
@@ -342,120 +343,162 @@
   import { initCarousel } from './js/carousel.js';
   document.addEventListener('DOMContentLoaded', initCarousel);
 </script>
-  <script type="text/babel">
-    const slides = [
-      {
-        image: "https://replicate.delivery/yhqm/NxttM0xZ5vLkMVa3sww1dR4ny3CiBEzLv4af6KWeLbFNLnQTA/out-0.png",
-        title: "İSTERSEN 50 KİŞİ DOĞRA YİNE DE GEL BANA UĞRA",
-        description: "Mahşer Gününde Allah'a karşı bile savunmanı yaparken Av. Can Vergili yanında..",
-        cta: "DAHA FAZLASI İÇİN"
-      },
-      {
-        image: "https://replicate.delivery/yhqm/wA2FNei0OG0yQS9ouQPz5st7tXNUft18DahR55u8yZceWOhmA/out-0.png",
-        title: "HUKUK BİZİM İŞİMİZ",
-        description: "Can Vergili ile hukukun her alanında yanınızdayız.",
-        cta: "HİZMETLERİMİZ"
-      },
-      {
-        image: "/images/crowd.png",
-        title: "ULUSLARARASI DENEYİM",
-        description: "Dünya çapında hukuki çözümler için doğru adres.",
-        cta: "HAKKIMIZDA"
-      }
-    ];
-    
-    const HeroCarousel = () => {
-      const [currentSlide, setCurrentSlide] = React.useState(0);
-      const [startX, setStartX] = React.useState(null);
-      const [isDragging, setIsDragging] = React.useState(false);
-    
-      React.useEffect(() => {
-        const timer = setInterval(() => {
-          if (!isDragging) {
-            setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-          }
-        }, 15000);
-        return () => clearInterval(timer);
-      }, [isDragging]);
-    
-      const nextSlide = () => {
-        setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
-      };
-    
-      const prevSlide = () => {
-        setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
-      };
-    
-      const handleDragStart = (e) => {
-        setStartX(e.touches ? e.touches[0].clientX : e.clientX);
-        setIsDragging(true);
-      };
-    
-      const handleDragEnd = (e) => {
-        if (!startX) return;
-        const endX = e.touches ? e.changedTouches[0].clientX : e.clientX;
-        const diffX = startX - endX;
-    
-        if (Math.abs(diffX) > 50) {
-          if (diffX > 0) {
-            nextSlide();
-          } else {
-            prevSlide();
-          }
+<script type="text/babel">
+  const { motion } = window.Motion;
+
+  const slides = [
+    {
+      video: "/videos/video1.mp4",
+      title: "İSTERSEN 50 KİŞİ DOĞRA YİNE DE GEL BANA UĞRA",
+      description: "Mahşer Gününde Allah'a karşı bile savunmanı yaparken Av. Can Vergili yanında..",
+      cta: "DAHA FAZLASI İÇİN"
+    },
+    {
+      video: "/videos/video2.mp4",
+      title: "HUKUK BİZİM İŞİMİZ",
+      description: "Can Vergili ile hukukun her alanında yanınızdayız.",
+      cta: "HİZMETLERİMİZ"
+    },
+    {
+      video: "/videos/video3.mp4",
+      title: "ULUSLARARASI DENEYİM",
+      description: "Dünya çapında hukuki çözümler için doğru adres.",
+      cta: "HAKKIMIZDA"
+    }
+  ];
+
+  const HeroCarousel = () => {
+    const [currentSlide, setCurrentSlide] = React.useState(0);
+    const [startX, setStartX] = React.useState(null);
+    const [isDragging, setIsDragging] = React.useState(false);
+    const videoRefs = React.useRef(slides.map(() => React.createRef()));
+
+    React.useEffect(() => {
+      const timer = setInterval(() => {
+        if (!isDragging) {
+          setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
         }
-    
-        setStartX(null);
-        setIsDragging(false);
-      };
-    
-      return (
-        <div 
-          className="relative h-[1000px] overflow-hidden" 
-          onMouseDown={handleDragStart}
-          onMouseUp={handleDragEnd}
-          onMouseLeave={handleDragEnd}
-          onTouchStart={handleDragStart}
-          onTouchEnd={handleDragEnd}
-        >
-          {slides.map((slide, index) => (
-            <div
-              key={index}
-              className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-                index === currentSlide ? 'opacity-100' : 'opacity-0'
-              }`}
-            >
-              <img src={slide.image} alt={slide.title} className="w-full h-full object-cover" />
-              <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start px-20">
-                <h1 className="text-white text-5xl font-light mb-4">{slide.title}</h1>
-                <p className="text-white text-xl mb-6">{slide.description}</p>
-                <button className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors">
-                  {slide.cta}
-                </button>
-              </div>
-            </div>
-          ))}
-          <button
-            onClick={prevSlide}
-            className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
-          >
-            &#10094;
-          </button>
-          <button
-            onClick={nextSlide}
-            className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
-          >
-            &#10095;
-          </button>
-        </div>
-      );
+      }, 15000);
+      return () => clearInterval(timer);
+    }, [isDragging]);
+
+    React.useEffect(() => {
+      videoRefs.current.forEach((ref, index) => {
+        if (index === currentSlide) {
+          ref.current.play();
+        } else {
+          ref.current.pause();
+          ref.current.currentTime = 0;
+        }
+      });
+    }, [currentSlide]);
+
+    const nextSlide = () => {
+      setCurrentSlide((prevSlide) => (prevSlide + 1) % slides.length);
     };
-    
-    ReactDOM.render(
-      <React.StrictMode>
-        <HeroCarousel />
-      </React.StrictMode>,
-      document.getElementById('hero-carousel-root')
+
+    const prevSlide = () => {
+      setCurrentSlide((prevSlide) => (prevSlide - 1 + slides.length) % slides.length);
+    };
+
+    const handleDragStart = (e) => {
+      setStartX(e.touches ? e.touches[0].clientX : e.clientX);
+      setIsDragging(true);
+    };
+
+    const handleDragEnd = (e) => {
+      if (!startX) return;
+      const endX = e.touches ? e.changedTouches[0].clientX : e.clientX;
+      const diffX = startX - endX;
+
+      if (Math.abs(diffX) > 50) {
+        if (diffX > 0) {
+          nextSlide();
+        } else {
+          prevSlide();
+        }
+      }
+
+      setStartX(null);
+      setIsDragging(false);
+    };
+
+    return (
+      <div 
+        className="relative h-[1000px] overflow-hidden" 
+        onMouseDown={handleDragStart}
+        onMouseUp={handleDragEnd}
+        onMouseLeave={handleDragEnd}
+        onTouchStart={handleDragStart}
+        onTouchEnd={handleDragEnd}
+      >
+        {slides.map((slide, index) => (
+          <div
+            key={index}
+            className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
+              index === currentSlide ? 'opacity-100' : 'opacity-0'
+            }`}
+          >
+            <video
+              ref={videoRefs.current[index]}
+              src={slide.video}
+              className="w-full h-full object-cover"
+              muted
+              loop
+              playsInline
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start px-20">
+              <motion.h1 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.2 }}
+                className="text-white text-5xl font-light mb-4"
+              >
+                {slide.title}
+              </motion.h1>
+              <motion.p 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.4 }}
+                className="text-white text-xl mb-6"
+              >
+                {slide.description}
+              </motion.p>
+              <motion.button 
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.6 }}
+                className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors"
+              >
+                {slide.cta}
+              </motion.button>
+            </div>
+          </div>
+        ))}
+        <button
+          onClick={prevSlide}
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
+        >
+          &#10094;
+        </button>
+        <button
+          onClick={nextSlide}
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
+        >
+          &#10095;
+        </button>
+      </div>
     );
-    </script>
+  };
+
+  ReactDOM.render(
+    <React.StrictMode>
+      <HeroCarousel />
+    </React.StrictMode>,
+    document.getElementById('hero-carousel-root')
+  );
+</script>
+    
  </body>
 </html>
