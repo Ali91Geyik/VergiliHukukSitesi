@@ -85,6 +85,8 @@ nav a:hover::after {
 /* Yeni eklenen stiller */
 .logo-container {
     position: relative;
+    width: 180px;  /* Konteyner genişliği */
+    aspect-ratio: 1;  /* GIF'in orijinal en-boy oranı, örneğin 3:2 */
     overflow: hidden;
 }
 
@@ -92,10 +94,22 @@ nav a:hover::after {
     transition: opacity 0.3s ease-in-out;
 }
 
+.logo-static,
 .logo-gif {
     position: absolute;
     top: 0;
     left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    object-position: center;
+    transition: opacity 0.3s ease-in-out;
+}
+.logo-static {
+    z-index: 2;
+}
+.logo-gif {
+    z-index: 1;
     opacity: 0;
 }
 
@@ -114,3 +128,4 @@ nav a:hover::after {
 .language-drawer.open {
     transform: translateX(0);
 }
+
