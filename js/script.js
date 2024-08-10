@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import HeroCarousel from './HeroCarousel'; // HeroCarousel bileşeninin yolunu doğru şekilde belirtin
+import HeroCarousel from './carousel'; // HeroCarousel bileşeninin yolunu doğru şekilde belirtin
 
 ReactDOM.render(
   <React.StrictMode>

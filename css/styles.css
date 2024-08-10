@@ -81,3 +81,36 @@ nav a:hover::after {
 #language-drawer {
     z-index: 10;
 }
+
+/* Yeni eklenen stiller */
+.logo-container {
+    position: relative;
+    overflow: hidden;
+}
+
+.logo-static, .logo-gif {
+    transition: opacity 0.3s ease-in-out;
+}
+
+.logo-gif {
+    position: absolute;
+    top: 0;
+    left: 0;
+    opacity: 0;
+}
+
+.logo-container:hover .logo-static {
+    opacity: 0;
+}
+
+.logo-container:hover .logo-gif {
+    opacity: 1;
+}
+
+.language-drawer {
+    transition: transform 0.3s ease-in-out;
+}
+
+.language-drawer.open {
+    transform: translateX(0);
+}
