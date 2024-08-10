@@ -1,0 +1,96 @@
+css/animations.css dosyasında aşağıdaki değişiklikleri yapın:
+
+/* Genel container stili */
+#legal-services {
+    overflow: hidden;
+    padding: 2rem;
+    background-color: #f8f8f8;
+}
+
+/* Başlık stili */
+#legal-services h2 {
+    font-family: 'Playfair Display', serif;
+    color: #DC2626;
+    font-size: 2.625rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+    line-height: 1.2;
+    background-color: white;
+    padding: 1rem;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+    transition: all 0.3s ease;
+}
+
+#legal-services h2:hover {
+    box-shadow: 0 4px 8px rgba(0,0,0,0.15);
+    transform: translateY(-2px);
+}
+
+/* Alt başlık ve paragraf stili (hover ve highlight efektleri kaldırıldı) */
+#legal-services h3,
+#legal-services p {
+    font-family: 'Playfair Display', serif;
+    background-color: transparent;
+    padding: 0;
+    border-radius: 0;
+    box-shadow: none;
+}
+
+#legal-services h3 {
+    font-size: 2.25rem;
+    font-weight: 300;
+    margin-bottom: 1.5rem;
+}
+
+#legal-services p {
+    color: #4B5563;
+    margin-bottom: 1.5rem;
+}
+
+/* Buton stili */
+.animated-button {
+    background-color: #DC2626;
+    color: white;
+    padding: 0.75rem 1.5rem;
+    border: none;
+    cursor: pointer;
+    font-family: 'Roboto', sans-serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: all 0.3s ease;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(220,38,38,0.3);
+}
+
+.animated-button:hover {
+    background-image: linear-gradient(45deg, #DC2626, #9CA3AF);
+    transform: scale(1.05);
+    box-shadow: 0 4px 8px rgba(220,38,38,0.4);
+}
+
+/* Görsel stili */
+.animated-image {
+    width: 100%;
+    height: auto;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    transition: all 0.3s ease;
+}
+
+.animated-image:hover {
+    box-shadow: 0 6px 12px rgba(0,0,0,0.3);
+    transform: scale(1.02);
+}
+
+/* Animasyon sınıfları */
+.animated-text, .animated-button, .animated-image {
+    opacity: 0;
+    transform: translateX(-20px);
+    transition: opacity 0.5s ease, transform 0.5s ease;
+}
+
+.visible {
+    opacity: 1;
+    transform: translateX(0);
+}

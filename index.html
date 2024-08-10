@@ -18,6 +18,9 @@
             font-family: 'Roboto', sans-serif;
         }
   </style>
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="css/animations.css">
  </head>
  <body class="bg-white">
   <header class="bg-white shadow-md h-24">
@@ -66,28 +69,18 @@
    </header>
   <main>
     <div id="hero-carousel-root" class="relative"></div>
-   <section class="container mx-auto px-4 py-16 flex flex-wrap">
-    <div class="w-full md:w-1/2 pr-8">
-     <h2 class="text-red-600 text-sm font-bold mb-4">
-      CAN VERGİLİ UZMANLIĞI
-     </h2>
-     <h3 class="text-4xl font-light mb-6">
-      Bizde suçlama yoktur. Bizde aklama ve aklanma vardır. Kayıt dışı gelir işlemleri için lütfen özelden ulaşın.
-     </h3>
-     <p class="text-gray-600 mb-6">
-      Can Vergili Avukatlık hizmeti sınır tanımayan hizmet anlayışı ile hukukun esnekliğini test etme zamanı. Bakalım bu meret ne kadar esneyebiliyor.
-     </p>
-     <p class="text-gray-600 mb-6">
-      Hukuk dediğin nedir ki, mühim olan insanlık, Benjaminin yeşili, ortamlarım dişili, ben avukat Vergili, gezdim yirmi beş ili.
-     </p>
-     <button class="bg-red-600 text-white px-6 py-2">
-      HAKKIMIZDA
-     </button>
-    </div>
-    <div class="w-full md:w-1/2 mt-8 md:mt-0">
-     <img alt="Lady Justice statue on a desk with bookshelves in the background" class="w-full h-auto" height="400" src="https://replicate.delivery/yhqm/wA2FNei0OG0yQS9ouQPz5st7tXNUft18DahR55u8yZceWOhmA/out-0.png" width="600"/>
-    </div>
-   </section>
+    <section id="legal-services" class="container mx-auto px-4 py-16 flex flex-wrap">
+      <div class="w-full md:w-1/2 pr-8">
+          <h2 class="animated-text">CAN VERGİLİ UZMANLIĞI</h2>
+          <h3 class="animated-text">Bizde suçlama yoktur. Bizde aklama ve aklanma vardır. Kayıt dışı gelir işlemleri için lütfen özelden ulaşın.</h3>
+          <p class="animated-text">Can Vergili Avukatlık hizmeti sınır tanımayan hizmet anlayışı ile hukukun esnekliğini test etme zamanı. Bakalım bu meret ne kadar esneyebiliyor.</p>
+          <p class="animated-text">Hukuk dediğin nedir ki, mühim olan insanlık, Benjaminin yeşili, ortamlarım dişili, ben avukat Vergili, gezdim yirmi beş ili.</p>
+          <button class="animated-button">HAKKIMIZDA</button>
+      </div>
+      <div class="w-full md:w-1/2 mt-8 md:mt-0">
+          <img class="animated-image" alt="Lady Justice statue on a desk with bookshelves in the background" src="https://replicate.delivery/yhqm/wA2FNei0OG0yQS9ouQPz5st7tXNUft18DahR55u8yZceWOhmA/out-0.png" width="600" height="400"/>
+      </div>
+  </section>
    <section class="container mx-auto px-4 py-16">
     <h2 class="text-4xl font-light text-center mb-12">
      Services
@@ -344,7 +337,7 @@
   document.addEventListener('DOMContentLoaded', initCarousel);
 </script>
 <script type="text/babel">
-  const { motion } = window.Motion;
+  const { motion, AnimatePresence } = window.Motion;
 
   const slides = [
     {
@@ -372,6 +365,7 @@
     const [startX, setStartX] = React.useState(null);
     const [isDragging, setIsDragging] = React.useState(false);
     const videoRefs = React.useRef(slides.map(() => React.createRef()));
+    const containerRef = React.useRef(null);
 
     React.useEffect(() => {
       const timer = setInterval(() => {
@@ -423,8 +417,13 @@
       setIsDragging(false);
     };
 
+    const handleButtonHover = (e) => {
+      e.stopPropagation();
+    };
+
     return (
       <div 
+        ref={containerRef}
         className="relative h-[1000px] overflow-hidden" 
         onMouseDown={handleDragStart}
         onMouseUp={handleDragEnd}
@@ -436,7 +435,7 @@
           <div
             key={index}
             className={`absolute top-0 left-0 w-full h-full transition-opacity duration-500 ${
-              index === currentSlide ? 'opacity-100' : 'opacity-0'
+              index === currentSlide ? 'opacity-100 z-10' : 'opacity-0 z-0'
             }`}
           >
             <video
@@ -448,43 +447,60 @@
               playsInline
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start px-20">
-              <motion.h1 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.2 }}
-                className="text-white text-5xl font-light mb-4"
-              >
-                {slide.title}
-              </motion.h1>
-              <motion.p 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.4 }}
-                className="text-white text-xl mb-6"
-              >
-                {slide.description}
-              </motion.p>
-              <motion.button 
-                initial={{ opacity: 0, y: 20 }}
-                animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5, delay: 0.6 }}
-                className="bg-red-600 text-white px-6 py-2 rounded-full hover:bg-red-700 transition-colors"
-              >
-                {slide.cta}
-              </motion.button>
+            <div className="absolute inset-0 bg-black bg-opacity-50 flex flex-col justify-center items-start px-20 pointer-events-none">
+              <AnimatePresence mode="wait">
+                {index === currentSlide && (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 100 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    exit={{ opacity: 0, y: -50 }}
+                    transition={{ duration: 2.0, ease: "easeOut" }}
+                    className="pointer-events-auto"
+                  >
+                    <motion.h1 
+                      className="text-white text-5xl font-bold mb-4"
+                      style={{
+                        fontFamily: "'Playfair Display', serif",
+                      }}
+                    >
+                      {slide.title}
+                    </motion.h1>
+                    <motion.p 
+                      className="text-white text-xl mb-6"
+                    >
+                      {slide.description}
+                    </motion.p>
+                    <motion.button 
+                      className="bg-transparent text-white px-6 py-3 rounded-full border-2 border-white cursor-pointer relative overflow-hidden group"
+                      whileHover={{ scale: 1.05 }}
+                      whileTap={{ scale: 0.95 }}
+                      onMouseEnter={handleButtonHover}
+                      onMouseLeave={handleButtonHover}
+                    >
+                      <motion.div
+                        className="absolute inset-0 bg-gradient-to-r from-gray-500 to-red-600"
+                        initial={{ opacity: 0 }}
+                        whileHover={{ opacity: 0.7 }}
+                        transition={{ duration: 0.3 }}
+                      />
+                      <span className="relative z-10">{slide.cta}</span>
+                    </motion.button>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </div>
           </div>
         ))}
         <button
           onClick={prevSlide}
-          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
+          className="absolute top-1/2 left-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors z-20"
         >
           &#10094;
         </button>
         <button
           onClick={nextSlide}
-          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors"
+          className="absolute top-1/2 right-4 transform -translate-y-1/2 bg-white bg-opacity-50 rounded-full p-2 hover:bg-opacity-75 transition-colors z-20"
         >
           &#10095;
         </button>
@@ -499,6 +515,7 @@
     document.getElementById('hero-carousel-root')
   );
 </script>
+<script src="js/animations.js"></script>
     
  </body>
 </html>
