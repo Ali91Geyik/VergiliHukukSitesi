@@ -11,7 +11,7 @@ css/animations.css dosyasında aşağıdaki değişiklikleri yapın:
 #legal-services h2 {
     font-family: 'Playfair Display', serif;
     color: #DC2626;
-    font-size: 2.625rem;
+    font-size: 1.625rem;
     font-weight: 700;
     margin-bottom: 1rem;
     line-height: 1.2;
@@ -65,7 +65,7 @@ css/animations.css dosyasında aşağıdaki değişiklikleri yapın:
 
 .animated-button:hover {
     background-image: linear-gradient(45deg, #DC2626, #9CA3AF);
-    transform: scale(1.05);
+    transform: scale(1.1);
     box-shadow: 0 4px 8px rgba(220,38,38,0.4);
 }
 
