@@ -5,19 +5,28 @@ export function initializeLanguageSwitch() {
       const currentLanguage = document.getElementById('current-language');
       const currentFlag = document.getElementById('current-flag');
       const alternateFlag = document.getElementById('alternate-flag');
+      const DRAWER_Z_INDEX = 9999;
 
       let chosenLanguage = 'TR'; // Varsayılan dil
+
+      
+
+    function updateDrawerZIndex() {
+  languageDrawer.style.zIndex = DRAWER_Z_INDEX.toString();
+}
 
       function updateLanguageDisplay() {
           currentLanguage.textContent = chosenLanguage;
           currentFlag.src = `images/${chosenLanguage === 'TR' ? 'TurkeyFlag.png' : 'BritainFlag.png'}`;
           alternateFlag.src = `images/${chosenLanguage === 'TR' ? 'BritainFlag.png' : 'TurkeyFlag.png'}`;
+          updateDrawerZIndex();
       }
 
       function toggleLanguage() {
           chosenLanguage = chosenLanguage === 'TR' ? 'EN' : 'TR';
           updateLanguageDisplay();
           languageDrawer.classList.remove('open');
+          updateDrawerZIndex();
           // Burada normalde sitenin dilini değiştirmek için gerekli mantığı eklersiniz
       }
 

@@ -19,6 +19,9 @@
    body {
             font-family: 'Roboto', sans-serif;
         }
+        .gradient-strip {
+          background: linear-gradient(to right, #808080, #DC2626, #000000);
+        }
   </style>
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&display=swap" rel="stylesheet">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;700&family=Roboto:wght@300;400;700&display=swap" rel="stylesheet">
@@ -29,19 +32,19 @@
   <header class="bg-white shadow-md h-24">
     <div class="container mx-auto px-4 py-2 flex items-center h-full">
       <div class="relative mr-8 logo-container">
-        <img alt="Hansu Attorney Partnership logo" class="logo-static" src="images\canLogo1.png"/>
-        <img alt="Hansu Attorney Partnership logo gif" class="logo-gif" src="images\CanLogoHareketli.gif"/>
+        <img alt="Vergili Logo" class="logo-static" src="images\canLogo1.png"/>
+        <img alt="Vergili logo gif" class="logo-gif" src="images\CanLogoHareketli.gif"/>
     </div>
         <nav class="hidden md:flex space-x-6 text-lg font-bold flex-grow justify-center">
-            <a class="text-gray-600 hover:text-red-600 relative group px-2 py-1" href="#">
-                HAKKIMIZDA
-                <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-gray-400 to-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
-            </a>
+          <a href="hakkimizda.html" class="text-gray-600 hover:text-red-600 relative group px-2 py-1">
+            HAKKIMIZDA
+            <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-gray-400 to-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
+          </a>
             <a class="text-gray-600 hover:text-red-600 relative group px-2 py-1" href="#">
                 AVUKATLARIMIZ
                 <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-gray-400 to-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </a>
-            <a class="text-gray-600 hover:text-red-600 relative group px-2 py-1" href="#">
+            <a class="text-gray-600 hover:text-red-600 relative group px-2 py-1" href="hizmetlerimiz.html">
                 HİZMETLERİMİZ
                 <span class="absolute bottom-0 left-0 w-full h-0.5 bg-gradient-to-r from-gray-400 to-red-400 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 ease-out origin-left"></span>
             </a>
@@ -74,6 +77,7 @@
     </div>
 </header>
   <main>
+    <div class="gradient-strip absolute w-full h-6 z-10"></div>
     <div id="hero-carousel-root" class="relative"></div>
     <section id="legal-services" class="container mx-auto px-4 py-16 flex flex-wrap">
       <div class="w-full md:w-1/2 pr-8">
@@ -257,7 +261,7 @@
    <div class="container mx-auto px-4">
     <div class="flex flex-wrap">
      <div class="w-full md:w-1/3 mb-8 md:mb-0">
-      <img alt="Hansu Attorney Partnership logo" class="mb-4" height="150" src="images\CanLogo.png" width="150"/>
+      <img alt="Vergili logo" class="mb-4" height="150" src="images\CanLogo.png" width="150"/>
       <p class="text-sm mb-4">
         Vergili Hukuk Bürosu, çeşitli sektörlerdeki müşterilerine tek elden hukuki hizmetler sunan uluslararası bir hukuk firmasıdır. Firmamız, Türkiye'de ve yurtdışında yabancı ve yerel şirketlere, özel işletmelere ve kamu otoritelerine ve bireylere hukuki danışmanlık hizmetleri sunmaktadır.
       </p>
